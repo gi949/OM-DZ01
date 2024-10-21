@@ -7,7 +7,7 @@ nginx, php-fpm, database (MySQL)
 На CMS развернут тестовый домен http://www.example.com/
 
 
-  Установка и настройка node_exporter
+Установка и настройка node_exporter
 
 Скачиваем и распаковываем Node Exporter
 
