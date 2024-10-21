@@ -264,37 +264,62 @@ cp blackbox_exporter /usr/local/bin/
 
 nano /opt/blackbox/blackbox.yml
 
+
 modules:
+
   http_2xx:
+  
     prober: http
+    
     timeout: 5s
+    
     http:
+    
       valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
       valid_status_codes: [200]
+      
       no_follow_redirects: false
+      
       preferred_ip_protocol: "ip4"
 
 
 Создаем системный юнит
+
 sudo nano /etc/systemd/system/blackbox_exporter.service
+
 [Unit]
+
 Description=Blackbox Exporter Service
+
 Wants=network-online.target
+
 After=network-online.target
 
+
 [Service]
+
 User=blackbox
+
 Group=blackbox
+
 ExecStart=/usr/local/bin/blackbox_exporter --config.file=/opt/blackbox/blackbox.yml
+
 Restart=always
 
+
 [Install]
+
 WantedBy=multi-user.target
 
+
 Разрешаем и стартуем сервис:
+
 systemctl daemon-reload
+
 systemctl enable --now blackbox_exporter
+
 systemctl status blackbox_exporter
+
 
 
 На этой же ВМ запускаем prometheus server с помощью docker-compose
