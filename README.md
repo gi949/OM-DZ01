@@ -9,6 +9,8 @@ nginx, php-fpm, database (MySQL)
 
 
 
+  
+
 Установка и настройка node_exporter
 
 Скачиваем и распаковываем Node Exporter
