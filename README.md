@@ -320,6 +320,7 @@ systemctl status blackbox_exporter
 В разделе blackbox в пункте targets указываем URL-адреса для проверки доступности CMS
 
 Запускаем сервер prometheus
+
 docker-compose up -d
 
 Подключаемся к веб-интерфейсу сервера prometheus по http://localhost:9090
