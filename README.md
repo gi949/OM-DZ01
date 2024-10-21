@@ -20,21 +20,35 @@ useradd -rs /bin/false nodeusr
 mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/
 
 Создаем файл для автозапуска экспортера:
+
 vim /etc/systemd/system/node_exporter.service
+
 [Unit]
+
 Description=Node Exporter
+
 After=network.target
+
 [Service]
+
 User=nodeusr
+
 Group=nodeusr
+
 Type=simple
+
 ExecStart=/usr/local/bin/node_exporter
+
 [Install]
+
 WantedBy=multi-user.target
 
 Запускаем сервис
+
 systemctl daemon-reload
+
 systemctl start node_exporter
+
 systemctl enable node_exporter
 
 Также можно получить набор метрик:
