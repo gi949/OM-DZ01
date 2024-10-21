@@ -65,6 +65,7 @@ curl http://localhost:9100/metrics
 
 
 
+
 Установка nginx_exporter
 
 Подключаем репозиторий
