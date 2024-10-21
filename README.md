@@ -260,28 +260,9 @@ cp blackbox_exporter /usr/local/bin/
 
 
 
-Настраиваем конфигурацию Blackbox Exporter:
+Настраиваем конфигурацию Blackbox Exporter в 
 
-nano /opt/blackbox/blackbox.yml
-
-
-modules:
-
-  http_2xx:
-  
-    prober: http
-    
-    timeout: 5s
-    
-    http:
-    
-      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
-      valid_status_codes: [200]
-      
-      no_follow_redirects: false
-      
-      preferred_ip_protocol: "ip4"
-
+/opt/blackbox/blackbox.yml
 
 Создаем системный юнит
 
