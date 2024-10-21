@@ -323,6 +323,8 @@ systemctl status blackbox_exporter
 
 
 
+
+
 На этой же ВМ запускаем prometheus server с помощью docker-compose
 
 Настраиваем конфигурацию docker-compose:
@@ -335,12 +337,18 @@ version: '3'
 services:
 
   prometheus:
+
     image: prom/prometheus:latest
     volumes:
+    
     - ./prometheus.yml/:/etc/prometheus/prometheus.yml
+    
     command:
+    
     - '--config.file=/etc/prometheus/prometheus.yml'
+    
     ports:
+    
     - 9090:9090
 	
 	
