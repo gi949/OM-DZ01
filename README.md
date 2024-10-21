@@ -43,6 +43,7 @@ ExecStart=/usr/local/bin/node_exporter
 
 WantedBy=multi-user.target
 
+
 Запускаем сервис
 
 systemctl daemon-reload
@@ -52,45 +53,70 @@ systemctl start node_exporter
 systemctl enable node_exporter
 
 Также можно получить набор метрик:
+
 curl http://localhost:9100/metrics
 
 
 Установка nginx_exporter
 
 Подключаем репозиторий
+
 yum install epel-release
+
 Snap можно установить следующим образом:
+
 yum install snapd
+
 После установки необходимо включить модуль systemd , который управляет основным сокетом связи Snap:
+
 systemctl enable --now snapd.socket
+
 ln -s /var/lib/snapd/snap /snap
+
 Установить экспортер NGINX Prometheus
+
 snap install nginx-prometheus-exporter
 
 cp /var/lib/snapd/snap/nginx-prometheus-exporter/120/nginx-prometheus-exporter /usr/local/bin/
 
 Создаем файл для автозапуска экспортера:
+
 vim /etc/systemd/system/nginx_exporter.service
+
 [Unit]
+
 Description=Node Exporter Service
+
 After=network.target
 
 [Service]
+
 User=nodeusr
+
 Group=nodeusr
+
 Type=simple
+
 ExecStart=/usr/local/bin/nginx-prometheus-exporter -nginx.scrape-uri=http://127.0.0.1:8080/server-status
+
 ExecReload=/bin/kill -HUP $MAINPID
+
 Restart=on-failure
 
 [Install]
+
 WantedBy=multi-user.target
 
+
 Разрешаем и стартуем сервис nginx_exporter:
+
 systemctl enable nginx_exporter
+
 systemctl start nginx_exporter
 
+
 Также можно получить набор метрик:
+
 curl 127.0.0.1:9113/metrics
 
 
