@@ -372,7 +372,7 @@ scrape_configs:
 
       - targets:
 
-	- 192.168.56.103:9100
+        - 192.168.56.103:9100
 
   - job_name: nginx
 
