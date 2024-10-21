@@ -130,7 +130,7 @@ systemctl start nginx_exporter
 curl 127.0.0.1:9113/metrics
 
 
-
+---
 Установка mysql_exporter
 
 Создаем пользователя:
@@ -239,7 +239,7 @@ systemctl start mysql_exporter
 curl http://localhost:9104/metrics
 
 
-
+---
 На второй ВМ устанавливаем и настраиваем Blackbox Exporter
 
 Добавляем пользователя и создаем каталог для файла конфигурации Blackbox Exporter:
@@ -323,8 +323,7 @@ systemctl status blackbox_exporter
 
 
 
-
-
+---
 На этой же ВМ запускаем prometheus server с помощью docker-compose
 
 Настраиваем конфигурацию docker-compose:
