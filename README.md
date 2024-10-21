@@ -97,7 +97,6 @@ FLUSH PRIVILEGES;
 Настраиваем доступ к БД для mysqld_exporter: 
 vim /etc/.mysqld_exporter.cnf
 
-# Add correct username and password for user create
 [client]
 user=mysqld_exporter
 password=StrongPass1
