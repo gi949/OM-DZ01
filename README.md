@@ -243,17 +243,27 @@ curl http://localhost:9104/metrics
 На второй ВМ устанавливаем и настраиваем Blackbox Exporter
 
 Добавляем пользователя и создаем каталог для файла конфигурации Blackbox Exporter:
+
 useradd -M -s /bin/false blackbox
+
 mkdir /opt/blackbox
 
 Скачиваем финальную версию, распаковываем её и копируем в каталог:
+
 wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.23.0/blackbox_exporter-0.23.0.linux-amd64.tar.gz
+
 tar xzf blackbox_exporter-0.23.0.linux-amd64.tar.gz
+
 cd blackbox_exporter-0.23.0.linux-amd64
+
 cp blackbox_exporter /usr/local/bin/
 
+
+
 Настраиваем конфигурацию Blackbox Exporter:
+
 nano /opt/blackbox/blackbox.yml
+
 modules:
   http_2xx:
     prober: http
