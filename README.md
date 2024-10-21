@@ -259,11 +259,13 @@ docker-compose up -d
 
 Подключаемся к веб-интерфейсу сервера prometheus по http://localhost:9090
 
-Проверяем доступность CMS и Exporter-ов:
+Проверяем доступность CMS:
 
 ![s1](https://github.com/user-attachments/assets/ae07f9d4-2b14-472c-9a93-173fb296b65b)
 
+и Exporter-ов
 ![s2](https://github.com/user-attachments/assets/888b9aac-0de2-4945-8811-db82cca1eecb)
+
 
 
 
