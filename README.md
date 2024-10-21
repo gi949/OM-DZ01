@@ -356,42 +356,73 @@ services:
 prometheus.yml
 
 global:
+
   scrape_interval: 5s
+  
   scrape_timeout: 3s
+  
   evaluation_interval: 5s
+  
 
 scrape_configs:
+
   - job_name: node
+
     static_configs:
+
       - targets:
-        - 192.168.56.103:9100
+
+	- 192.168.56.103:9100
 
   - job_name: nginx
+
     static_configs:
+
       - targets:
-        - 192.168.56.103:9113
+
+	- 192.168.56.103:9113
+
 
   - job_name: mysql
+
     static_configs:
+
       - targets:
-        - 192.168.56.103:9104
+
+	- 192.168.56.103:9104
 		
   - job_name: blackbox
+
     metrics_path: /probe
+
     params:
+
       module: [http_2xx]
+
     static_configs:
+
       - targets:
-        - http://www.example.com
-        - http://www.example.com/?page_id=2
-        - www.example.com/?page_id=7
+
+	- http://www.example.com
+
+	- http://www.example.com/?page_id=2
+
+	- www.example.com/?page_id=7
+
     relabel_configs:
+
       - source_labels: [__address__]
-        target_label: __param_target
+
+	target_label: __param_target
+
       - source_labels: [__param_target]
-        target_label: instance
+
+	target_label: instance
+
       - target_label: __address__
-        replacement: 192.168.56.101:9115
+
+	replacement: 192.168.56.101:9115
+
 
 
 В разделе blackbox в пункте targets указываем URL-адреса для проверки доступности CMS
