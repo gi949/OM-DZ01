@@ -263,6 +263,7 @@ docker-compose up -d
 
 ![s1](https://github.com/user-attachments/assets/ae07f9d4-2b14-472c-9a93-173fb296b65b)
 
-![Uploading s2.JPG…]()
+![s2](https://github.com/user-attachments/assets/888b9aac-0de2-4945-8811-db82cca1eecb)
+
 
 
