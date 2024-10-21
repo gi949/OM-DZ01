@@ -1,9 +1,12 @@
 # OM-DZ01
 
 На виртуальной машине установлена CMS wordpress, которая включает в себя следующие компоненты: 
+
 nginx, php-fpm, database (MySQL)
 
 На CMS развернут тестовый домен http://www.example.com/
+
+
 
 Установка и настройка node_exporter
 
@@ -13,11 +16,13 @@ wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_e
 
 tar xzvf node_exporter-1.8.2.linux-amd64.tar.gz
 
+
 Создаем пользователя, перемещаем бинарник в /usr/local/bin
 
 useradd -rs /bin/false nodeusr
 
 mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/
+
 
 Создаем файл для автозапуска экспортера:
 
@@ -52,9 +57,11 @@ systemctl start node_exporter
 
 systemctl enable node_exporter
 
+
 Также можно получить набор метрик:
 
 curl http://localhost:9100/metrics
+
 
 
 
@@ -79,6 +86,7 @@ ln -s /var/lib/snapd/snap /snap
 snap install nginx-prometheus-exporter
 
 cp /var/lib/snapd/snap/nginx-prometheus-exporter/120/nginx-prometheus-exporter /usr/local/bin/
+
 
 Создаем файл для автозапуска экспортера:
 
@@ -121,45 +129,75 @@ systemctl start nginx_exporter
 curl 127.0.0.1:9113/metrics
 
 
+
 Установка mysql_exporter
 
 Создаем пользователя:
+
 groupadd --system prometheus
+
 useradd -s /sbin/nologin --system -g prometheus prometheus
 
+
 Скачиваем и распаковываем mysqld_exporter:
+
 wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.15.1/mysqld_exporter-0.15.1.linux-amd64.tar.gz
+
 tar xvf mysqld_exporter-0.15.1.linux-amd64.tar.gz
+
 mv  mysqld_exporter-*.linux-amd64/mysqld_exporter /usr/local/bin/
+
 chmod +x /usr/local/bin/mysqld_exporter
+
 mysqld_exporter  --version
 
+
 Создаем пользователя в БД mysql:
+
 CREATE USER 'mysqld_exporter'@'localhost' IDENTIFIED BY 'StrongPass1';
+
 GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'mysqld_exporter'@'localhost';
+
 FLUSH PRIVILEGES;
 
+
 Настраиваем доступ к БД для mysqld_exporter: 
+
 vim /etc/.mysqld_exporter.cnf
 
 [client]
+
 user=mysqld_exporter
+
 password=StrongPass1
 
+
 Задаем права:
+
 chown root:prometheus /etc/.mysqld_exporter.cnf
 
+
 Создаем файл для автозапуска экспортера:
+
 vi /etc/systemd/system/mysql_exporter.service
+
 [Unit]
+
 Description=Prometheus MySQL Exporter
+
 After=network.target
+
 User=prometheus
+
 Group=prometheus
 
+
 [Service]
+
 Type=simple
+
 Restart=always
+
 ExecStart=/usr/local/bin/mysqld_exporter \
 --config.my-cnf /etc/.mysqld_exporter.cnf \
 --collect.global_status \
@@ -180,16 +218,25 @@ ExecStart=/usr/local/bin/mysqld_exporter \
 --collect.slave_status \
 --web.listen-address=0.0.0.0:9104
 
+
 [Install]
+
 WantedBy=multi-user.target
 
+
 Разрешаем и стартуем сервис 
+
 systemctl daemon-reload
+
 systemctl enable mysql_exporter
+
 systemctl start mysql_exporter
 
+
 Также можно получить набор метрик: 
+
 curl http://localhost:9104/metrics
+
 
 
 На второй ВМ устанавливаем и настраиваем Blackbox Exporter
