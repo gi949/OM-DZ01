@@ -8,11 +8,15 @@ nginx, php-fpm, database (MySQL)
 Установка и настройка node_exporter
 
 Скачиваем и распаковываем Node Exporter
+
 wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+
 tar xzvf node_exporter-1.8.2.linux-amd64.tar.gz
 
 Создаем пользователя, перемещаем бинарник в /usr/local/bin
+
 useradd -rs /bin/false nodeusr
+
 mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/
 
 Создаем файл для автозапуска экспортера:
